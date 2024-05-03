@@ -1,4 +1,4 @@
-package com.monster.luvCocktail.domain.custom.dto;
+package com.monster.luvCocktail.domain.cocktail.dto;
 
 import lombok.Getter;
 

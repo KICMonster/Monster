@@ -1,14 +1,14 @@
-package com.monster.luvCocktail.domain.member.entity;
+package com.monster.luvCocktail.domain.ingredient.entity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.monster.luvCocktail.domain.cocktail.entity.Cocktail;
+import com.monster.luvCocktail.domain.cocktail.entity.CocktailAndIngredients;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,15 +17,16 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "member")
-public class Member {
+public class Ingredient {
 
 	@Id
 	private Long id;
 	
 	private String name;
+	private String description;
+	private String degree;
 	
-	// Member 가 만든 칵테일 목록 , Cocktail 의 creator 변수에 매핑
-	@OneToMany(mappedBy = "creator")
-	private List<Cocktail> cocktailList = new ArrayList<>();
+	@OneToMany(mappedBy = "ingredient")
+	private List<CocktailAndIngredients> cocktailList = new ArrayList<>();
+	
 }
