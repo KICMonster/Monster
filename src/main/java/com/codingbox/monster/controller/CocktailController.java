@@ -1,21 +1,30 @@
 package com.codingbox.monster.controller;
 
+import com.codingbox.monster.service.CocktailService;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.io.IOException;
 
 @RestController
 @RequestMapping("/cocktails")
 public class CocktailController {
 
+    private final CocktailService cocktailService;
+
+    @Autowired
+    public CocktailController(CocktailService cocktailService) {
+        this.cocktailService = cocktailService;
+    }
+
     @GetMapping("/search")
     public String searchCocktails() {
         OkHttpClient client = new OkHttpClient();
-
         Request request = new Request.Builder()
                 .url("https://the-cocktail-db.p.rapidapi.com/search.php?s=vodka")
                 .get()
@@ -26,7 +35,12 @@ public class CocktailController {
         try {
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
-                return response.body().string();
+                String responseData = response.body().string();
+
+                // 비동기적으로 데이터 저장
+                cocktailService.saveCocktailDataAsync(responseData);
+
+                return responseData;
             } else {
                 return "Failed to fetch cocktails";
             }
