@@ -1,11 +1,11 @@
-package com.codingbox.monster.dto;
+package com.codingbox.monster.pcrtest;
 
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
-public class CocktailDTO {
+public class Cocktail {
     private int idDrink; // 칵테일 고유 ID
     private String strDrink; // 음료 이름
     private String strDrinkAlternate; // 대체 음료 이름

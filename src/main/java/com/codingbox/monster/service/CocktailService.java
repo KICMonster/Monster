@@ -1,24 +1,34 @@
 package com.codingbox.monster.service;
 
-import com.codingbox.monster.entity.Cocktail;
-import com.codingbox.monster.repository.CocktailRepository;
-import org.springframework.scheduling.annotation.Async;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import java.io.IOException;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CocktailService {
 
-    private final CocktailRepository cocktailRepository;
+    private OkHttpClient client = new OkHttpClient();
 
-    public CocktailService(CocktailRepository cocktailRepository) {
-        this.cocktailRepository = cocktailRepository;
-    }
+    public String searchCocktails() {
+        Request request = new Request.Builder()
+                .url("https://the-cocktail-db.p.rapidapi.com/search.php?s=vodka")
+                .get()
+                .addHeader("X-RapidAPI-Key", "994a06b8f2mshbff0e95525f145fp1f054bjsn7eefc7c1bcf9")
+                .addHeader("X-RapidAPI-Host", "the-cocktail-db.p.rapidapi.com")
+                .build();
 
-    // 비동기로 칵테일 데이터 저장
-    @Async
-    public void saveCocktailDataAsync(String responseData) {
-        Cocktail cocktail = new Cocktail();
-        cocktail.setStrDrink(responseData); // 또는 다른 적절한 필드를 사용
-        cocktailRepository.save(cocktail);
+        try {
+            Response response = client.newCall(request).execute();
+            if (response.isSuccessful()) {
+                return response.body().string();
+            } else {
+                return "---실패---";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "에러내용: " + e.getMessage();
+        }
     }
 }
