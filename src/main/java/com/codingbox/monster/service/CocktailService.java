@@ -22,7 +22,8 @@ public class CocktailService {
         try {
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
-                return response.body().string();
+                return response.body().string
+                        ();
             } else {
                 return "---실패---";
             }
@@ -31,4 +32,6 @@ public class CocktailService {
             return "에러내용: " + e.getMessage();
         }
     }
+
+
 }
