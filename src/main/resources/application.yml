@@ -29,7 +29,7 @@ spring:
           SQL: debug
           type: trace
 server:
-  port: 8080
+  port: 8090
   servlet:
     encoding:
       charset: UTF-8

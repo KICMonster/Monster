@@ -24,7 +24,8 @@ public class CocktailController {
 
     @GetMapping("/search")
     public String searchCocktails() {
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient.Builder().build();
+
         Request request = new Request.Builder()
                 .url("https://the-cocktail-db.p.rapidapi.com/search.php?s=vodka")
                 .get()
@@ -37,7 +38,6 @@ public class CocktailController {
             if (response.isSuccessful()) {
                 String responseData = response.body().string();
 
-                // 비동기적으로 데이터 저장
                 cocktailService.saveCocktailDataAsync(responseData);
 
                 return responseData;

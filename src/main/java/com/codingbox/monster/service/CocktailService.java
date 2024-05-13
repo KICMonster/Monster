@@ -18,8 +18,7 @@ public class CocktailService {
     @Async
     public void saveCocktailDataAsync(String responseData) {
         Cocktail cocktail = new Cocktail();
-        cocktail.setResponseData(responseData);
+        cocktail.setStrDrink(responseData); // 또는 다른 적절한 필드를 사용
         cocktailRepository.save(cocktail);
     }
 }
-
