@@ -2,7 +2,9 @@ spring:
   application:
     name: luvCocktail
 
-
+config:
+  import:
+    classpath: applicationAPI.yml
 
   # MySQL 연결 설정
   datasource:
@@ -35,3 +37,4 @@ server:
       charset: UTF-8
       enabled: true
       force: true
+

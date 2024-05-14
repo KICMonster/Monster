@@ -27,7 +27,8 @@ public class ApiDefaultSetting {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("X-RapidAPI-Key", apiConfig.getApiKey());
-            conn.setRequestProperty("X-RapidAPI-Host", apiConfig.getApiHost());
+            conn.setRequestProperty("X-RapidAPI-requestURI", apiConfig.getApirequestURI());
+            conn.setRequestProperty("X-RapidAPI-host", apiConfig.getApihost());
             BufferedReader br;
             String result;
             if (conn.getResponseCode() == 200 && conn.getResponseCode() <= 300) {
@@ -47,6 +48,7 @@ public class ApiDefaultSetting {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     public JSONObject getResultJSON(String result) {
