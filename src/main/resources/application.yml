@@ -2,9 +2,8 @@ spring:
   application:
     name: luvCocktail
 
-config:
-  import:
-    classpath: applicationAPI.yml
+  config:
+    import: "classpath:applicationAPI.yml"
 
   # MySQL 연결 설정
   datasource:
@@ -31,7 +30,7 @@ config:
           SQL: debug
           type: trace
 server:
-  port: 8090
+  port: 8091
   servlet:
     encoding:
       charset: UTF-8

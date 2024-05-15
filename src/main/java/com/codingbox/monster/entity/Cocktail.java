@@ -67,5 +67,4 @@ public class Cocktail {
 
     private LocalDateTime dateModified;
 
-    // Getter 및 Setter
 }
