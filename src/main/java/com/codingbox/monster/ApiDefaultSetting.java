@@ -15,7 +15,7 @@ import java.net.URL;
 
 @RequiredArgsConstructor
 public class ApiDefaultSetting {
-    private ApiConfig apiConfig;
+    private final ApiConfig apiConfig;
 
     public StringBuilder getUrlBuilder() {
         return new StringBuilder("https://the-cocktail-db.p.rapidapi.com/search.php?s=vodka");

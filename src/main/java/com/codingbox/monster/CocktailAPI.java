@@ -29,6 +29,7 @@ public class  CocktailAPI {
                 String responseBody = body.string();
                 System.out.println(responseBody);
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

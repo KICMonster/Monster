@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource(value = "classpath:applicationAPI.yml")
 @Getter
 public class ApiConfig {
     @Value("${rapid.api.key}")

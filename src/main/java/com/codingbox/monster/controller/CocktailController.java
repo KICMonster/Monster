@@ -15,6 +15,7 @@ public class CocktailController {
 
     @GetMapping("/search")
     public String searchCocktails() {
+
         return cocktailService.searchCocktails();
     }
 }
