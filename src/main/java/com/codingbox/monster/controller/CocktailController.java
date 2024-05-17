@@ -20,13 +20,11 @@ public class CocktailController {
 
     @PostMapping("/save")
     public String saveCocktails(@RequestBody CocktailDTO cocktailDTO) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        // 예제 데이터를 생성합니다.
         List<Cocktail> cocktails = createExampleData(cocktailDTO, 100);
 
-        // 칵테일 데이터를 저장합니다.
         cocktailService.saveCocktails(cocktails);
 
-        return "Saved 100 cocktails successfully!";
+        return "저장성공";
     }
 
     private List<Cocktail> createExampleData(CocktailDTO cocktailDTO, int count) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {

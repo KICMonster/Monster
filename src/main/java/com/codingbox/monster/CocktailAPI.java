@@ -8,22 +8,17 @@ import java.io.IOException;
 
 public class  CocktailAPI {
     public static void main(String[] args) {
-        // OkHttpClient 생성
         OkHttpClient client = new OkHttpClient();
 
-        // Request 생성
         Request request = new Request.Builder()
                 .url("/cocktails")
                 .build();
 
-        // 동기적으로 요청 보내기
         try (Response response = client.newCall(request).execute()) {
-            // 응답 코드 확인
             if (!response.isSuccessful()) {
                 throw new IOException("Unexpected code " + response);
             }
 
-            // 응답 바디 가져오기
             ResponseBody body = response.body();
             if (body != null) {
                 String responseBody = body.string();

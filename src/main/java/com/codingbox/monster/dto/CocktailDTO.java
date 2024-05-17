@@ -2,12 +2,14 @@ package com.codingbox.monster.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 public class CocktailDTO {
+    @NotNull
     private Long idDrink;
     private String strDrink;
     private String strDrinkAlternate;
