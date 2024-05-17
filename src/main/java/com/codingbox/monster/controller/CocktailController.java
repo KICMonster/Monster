@@ -7,6 +7,7 @@ import com.codingbox.monster.service.CocktailService;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
 import org.json.simple.JSONArray;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,25 +29,10 @@ public class CocktailController {
 
 
     @PostMapping("/save")
-    public String saveCocktails(@RequestBody CocktailDTO cocktailDTO) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-
-        List<Cocktail> cocktails = createExampleData(cocktailDTO, 100);
-
+    public String saveCocktails() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, ParseException, ParseException {
+        List<Cocktail> cocktails = cocktailService.fetchCocktailsFromApi();
         cocktailService.saveCocktails(cocktails);
-
         return "저장성공";
-    }
-
-    private List<Cocktail> createExampleData(CocktailDTO cocktailDTO, Integer count) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        List<Cocktail> cocktails = new ArrayList<>();
-        JSONObject json = new org.json.JSONObject();
-
-        for (int i = 0; i < count; i++) {
-            Cocktail cocktail = cocktailService.getResult(json);
-            cocktails.add(cocktail);
-        }
-
-        return cocktails;
     }
 
 

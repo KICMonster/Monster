@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
+import org.json.JSONObject;
 
 import java.time.LocalDateTime;
 
@@ -60,7 +61,7 @@ public class Cocktail {
     private String strImageSource;
     private String strImageAttribution;
     private String strCreativeCommonsConfirmed;
-    private LocalDateTime dateModified;
+//    private LocalDateTime dateModified;
 
     // 기본 생성자
     public Cocktail() {}
@@ -111,6 +112,7 @@ public class Cocktail {
         this.strImageSource = strImageSource;
         this.strImageAttribution = strImageAttribution;
         this.strCreativeCommonsConfirmed = strCreativeCommonsConfirmed;
-        this.dateModified = dateModified;
+//        this.dateModified = dateModified;
     }
+
 }
