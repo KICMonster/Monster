@@ -1,89 +1,66 @@
 package com.codingbox.monster.service;
 
+import com.codingbox.monster.ApiConfig;
 import com.codingbox.monster.ApiDefaultSetting;
 import com.codingbox.monster.entity.Cocktail;
 import com.codingbox.monster.repository.CocktailRepository;
 import lombok.RequiredArgsConstructor;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class CocktailService {
-
     @Autowired
     private CocktailRepository cocktailRepository;
 
-    private final ApiDefaultSetting apiDefaultSetting;
+    private final ApiConfig apiConfig;
+
+    @Value("${rapid.api.key}")
+    private String apiKey;
+    @Value("${rapid.api.requestURI}")
+    private String apirequestURI;
+    @Value("${rapid.api.host}")
+    private String apihost;
 
     public void saveCocktails(List<Cocktail> cocktails) {
         cocktailRepository.saveAll(cocktails);
     }
 
-    public List<Cocktail> fetchAllCocktailsFromApi() throws ParseException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        List<Cocktail> allCocktails = new ArrayList<>();
-        boolean moreData = true;
-        int offset = 0;
-        int limit = 2;
-
-        while (moreData) {
-            StringBuilder url = apiDefaultSetting.getUrlBuilder();
-            url.append("&offset=").append(offset).append("&limit=").append(limit);
-            String response = apiDefaultSetting.getResult(url);
-            JSONArray jsonArray = getJsonArrayFromResponse(response);
-
-            if (jsonArray.isEmpty()) {
-                moreData = false;
-            } else {
-                List<Cocktail> cocktails = convertJsonArrayToCocktails(jsonArray);
-                allCocktails.addAll(cocktails);
-                offset += jsonArray.size();
-            }
-        }
-
-        return allCocktails;
+    public String searchCocktails() {
+        StringBuilder urlBuilder = new ApiDefaultSetting(apiConfig).getUrlBuilder();
+        return new ApiDefaultSetting(apiConfig).getResult(urlBuilder);
     }
 
-    private JSONArray getJsonArrayFromResponse(String response) throws ParseException {
-        JSONParser parser = new JSONParser();
-        JSONObject jsonObject = (JSONObject) parser.parse(response);
-        return (JSONArray) jsonObject.get("drinks");
-    }
-
-    private List<Cocktail> convertJsonArrayToCocktails(JSONArray jsonArray) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        List<Cocktail> cocktails = new ArrayList<>();
-        for (Object obj : jsonArray) {
-            JSONObject jsonObject = (JSONObject) obj;
-            Cocktail cocktail = convertJsonToCocktail(jsonObject);
-            cocktails.add(cocktail);
-        }
-        return cocktails;
-    }
-
-    private Cocktail convertJsonToCocktail(JSONObject jsonObject) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Long idDrink = Long.valueOf((String) jsonObject.get("idDrink"));
-        String strDrink = (String) jsonObject.get("strDrink");
-        String strDrinkAlternate = (String) jsonObject.get("strDrinkAlternate");
-        String strTags = (String) jsonObject.get("strTags");
-        String strVideo = (String) jsonObject.get("strVideo");
-        String strCategory = (String) jsonObject.get("strCategory");
-        String strIBA = (String) jsonObject.get("strIBA");
-        String strAlcoholic = (String) jsonObject.get("strAlcoholic");
-        String strGlass = (String) jsonObject.get("strGlass");
-        String strInstructions = (String) jsonObject.get("strInstructions");
-        String strDrinkThumb = (String) jsonObject.get("strDrinkThumb");
-        String strImageSource = (String) jsonObject.get("strImageSource");
-        String strImageAttribution = (String) jsonObject.get("strImageAttribution");
-        String strCreativeCommonsConfirmed = (String) jsonObject.get("strCreativeCommonsConfirmed");
+    public Cocktail getResult(JSONObject obj) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Long idDrink = obj.getLong("idDrink");
+        String strDrink = obj.getString("strDrink");
+        String strDrinkAlternate = obj.optString("strDrinkAlternate");
+        String strTags = obj.optString("strTags");
+        String strVideo = obj.optString("strVideo");
+        String strCategory = obj.optString("strCategory");
+        String strIBA = obj.optString("strIBA");
+        String strAlcoholic = obj.optString("strAlcoholic");
+        String strGlass = obj.optString("strGlass");
+        String strInstructions = obj.optString("strInstructions");
+        String strDrinkThumb = obj.optString("strDrinkThumb");
+        String strImageSource = obj.optString("strImageSource");
+        String strImageAttribution = obj.optString("strImageAttribution");
+        String strCreativeCommonsConfirmed = obj.optString("strCreativeCommonsConfirmed");
+        LocalDateTime dateModified = LocalDateTime.parse(obj.optString("dateModified"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
         Cocktail cocktail = new Cocktail();
         cocktail.setIdDrink(idDrink);
@@ -100,25 +77,45 @@ public class CocktailService {
         cocktail.setStrImageSource(strImageSource);
         cocktail.setStrImageAttribution(strImageAttribution);
         cocktail.setStrCreativeCommonsConfirmed(strCreativeCommonsConfirmed);
+        cocktail.setDateModified(dateModified);
 
         for (int i = 1; i <= 15; i++) {
             String ingredientKey = "strIngredient" + i;
-            String ingredient = (String) jsonObject.get(ingredientKey);
-            if (ingredient != null) {
-                Method ingredientSetter = Cocktail.class.getDeclaredMethod("setStrIngredient" + i, String.class);
-                ingredientSetter.invoke(cocktail, ingredient);
-            }
+            String ingredient = obj.optString(ingredientKey);
+            Method ingredientSetter = Cocktail.class.getDeclaredMethod("setStrIngredient" + i, String.class);
+            ingredientSetter.invoke(cocktail, ingredient);
         }
 
         for (int i = 1; i <= 15; i++) {
             String measureKey = "strMeasure" + i;
-            String measure = (String) jsonObject.get(measureKey);
-            if (measure != null) {
-                Method measureSetter = Cocktail.class.getDeclaredMethod("setStrMeasure" + i, String.class);
-                measureSetter.invoke(cocktail, measure);
-            }
+            String measure = obj.optString(measureKey);
+            Method measureSetter = Cocktail.class.getDeclaredMethod("setStrMeasure" + i, String.class);
+            measureSetter.invoke(cocktail, measure);
         }
 
         return cocktail;
+    }
+
+    public List<Cocktail> getListFromAPI() throws IOException {
+        OkHttpClient client = new OkHttpClient();
+
+        Request request = new Request.Builder()
+                .url(apirequestURI)
+                .get()
+                .addHeader("X-RapidAPI-Key", apiKey)
+                .addHeader("X-RapidAPI-Host", apihost)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (response.isSuccessful() && response.body() != null) {
+                System.out.println(response.body().string());
+            } else {
+                System.out.println("Request not successful: " + response);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return List.of();
     }
 }
