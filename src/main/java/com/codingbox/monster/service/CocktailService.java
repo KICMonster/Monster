@@ -9,19 +9,17 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class CocktailService {
+
     @Autowired
     private CocktailRepository cocktailRepository;
 
@@ -31,11 +29,37 @@ public class CocktailService {
         cocktailRepository.saveAll(cocktails);
     }
 
-    public List<Cocktail> fetchCocktailsFromApi() throws ParseException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        StringBuilder url = apiDefaultSetting.getUrlBuilder();
-        String response = apiDefaultSetting.getResult(url);
-        JSONArray jsonArray = getJsonArrayFromResponse(response);
+    public List<Cocktail> fetchAllCocktailsFromApi() throws ParseException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        List<Cocktail> allCocktails = new ArrayList<>();
+        boolean moreData = true;
+        int offset = 0;
+        int limit = 2;
 
+        while (moreData) {
+            StringBuilder url = apiDefaultSetting.getUrlBuilder();
+            url.append("&offset=").append(offset).append("&limit=").append(limit);
+            String response = apiDefaultSetting.getResult(url);
+            JSONArray jsonArray = getJsonArrayFromResponse(response);
+
+            if (jsonArray.isEmpty()) {
+                moreData = false;
+            } else {
+                List<Cocktail> cocktails = convertJsonArrayToCocktails(jsonArray);
+                allCocktails.addAll(cocktails);
+                offset += jsonArray.size();
+            }
+        }
+
+        return allCocktails;
+    }
+
+    private JSONArray getJsonArrayFromResponse(String response) throws ParseException {
+        JSONParser parser = new JSONParser();
+        JSONObject jsonObject = (JSONObject) parser.parse(response);
+        return (JSONArray) jsonObject.get("drinks");
+    }
+
+    private List<Cocktail> convertJsonArrayToCocktails(JSONArray jsonArray) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         List<Cocktail> cocktails = new ArrayList<>();
         for (Object obj : jsonArray) {
             JSONObject jsonObject = (JSONObject) obj;
@@ -43,12 +67,6 @@ public class CocktailService {
             cocktails.add(cocktail);
         }
         return cocktails;
-    }
-
-    private JSONArray getJsonArrayFromResponse(String response) throws ParseException {
-        JSONParser parser = new JSONParser();
-        JSONObject jsonObject = (JSONObject) parser.parse(response);
-        return (JSONArray) jsonObject.get("drinks");
     }
 
     private Cocktail convertJsonToCocktail(JSONObject jsonObject) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -66,7 +84,6 @@ public class CocktailService {
         String strImageSource = (String) jsonObject.get("strImageSource");
         String strImageAttribution = (String) jsonObject.get("strImageAttribution");
         String strCreativeCommonsConfirmed = (String) jsonObject.get("strCreativeCommonsConfirmed");
-//        LocalDateTime dateModified = LocalDateTime.parse((String) jsonObject.get("dateModified"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
         Cocktail cocktail = new Cocktail();
         cocktail.setIdDrink(idDrink);
@@ -83,7 +100,6 @@ public class CocktailService {
         cocktail.setStrImageSource(strImageSource);
         cocktail.setStrImageAttribution(strImageAttribution);
         cocktail.setStrCreativeCommonsConfirmed(strCreativeCommonsConfirmed);
-//        cocktail.setDateModified(dateModified);
 
         for (int i = 1; i <= 15; i++) {
             String ingredientKey = "strIngredient" + i;
