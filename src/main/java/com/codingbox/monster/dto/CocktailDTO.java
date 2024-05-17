@@ -20,12 +20,6 @@ public class CocktailDTO {
     private String strAlcoholic;
     private String strGlass;
     private String strInstructions;
-    private String strInstructionsES;
-    private String strInstructionsDE;
-    private String strInstructionsFR;
-    private String strInstructionsIT;
-    private String strInstructionsZH_HANS;
-    private String strInstructionsZH_HANT;
     private String strDrinkThumb;
     private String strIngredient1;
     private String strIngredient2;

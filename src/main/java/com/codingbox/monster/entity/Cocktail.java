@@ -26,12 +26,6 @@ public class Cocktail {
     private String strAlcoholic;
     private String strGlass;
     private String strInstructions;
-    private String strInstructionsES;
-    private String strInstructionsDE;
-    private String strInstructionsFR;
-    private String strInstructionsIT;
-    private String strInstructionsZH_HANS;
-    private String strInstructionsZH_HANT;
     private String strDrinkThumb;
     private String strIngredient1;
     private String strIngredient2;
@@ -72,7 +66,7 @@ public class Cocktail {
     public Cocktail() {}
 
     // 전체 필드를 포함하는 생성자
-    public Cocktail(Long idDrink, String strDrink, String strDrinkAlternate, String strTags, String strVideo, String strCategory, String strIBA, String strAlcoholic, String strGlass, String strInstructions, String strInstructionsES, String strInstructionsDE, String strInstructionsFR, String strInstructionsIT, String strInstructionsZH_HANS, String strInstructionsZH_HANT, String strDrinkThumb, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, String strImageSource, String strImageAttribution, String strCreativeCommonsConfirmed, LocalDateTime dateModified) {
+    public Cocktail(Long idDrink, String strDrink, String strDrinkAlternate, String strTags, String strVideo, String strCategory, String strIBA, String strAlcoholic, String strGlass, String strInstructions, String strDrinkThumb, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, String strImageSource, String strImageAttribution, String strCreativeCommonsConfirmed, LocalDateTime dateModified) {
         this.idDrink = idDrink;
         this.strDrink = strDrink;
         this.strDrinkAlternate = strDrinkAlternate;
@@ -83,12 +77,6 @@ public class Cocktail {
         this.strAlcoholic = strAlcoholic;
         this.strGlass = strGlass;
         this.strInstructions = strInstructions;
-        this.strInstructionsES = strInstructionsES;
-        this.strInstructionsDE = strInstructionsDE;
-        this.strInstructionsFR = strInstructionsFR;
-        this.strInstructionsIT = strInstructionsIT;
-        this.strInstructionsZH_HANS = strInstructionsZH_HANS;
-        this.strInstructionsZH_HANT = strInstructionsZH_HANT;
         this.strDrinkThumb = strDrinkThumb;
         this.strIngredient1 = strIngredient1;
         this.strIngredient2 = strIngredient2;

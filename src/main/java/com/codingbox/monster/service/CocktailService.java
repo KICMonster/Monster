@@ -5,10 +5,16 @@ import com.codingbox.monster.ApiDefaultSetting;
 import com.codingbox.monster.entity.Cocktail;
 import com.codingbox.monster.repository.CocktailRepository;
 import lombok.RequiredArgsConstructor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.time.LocalDateTime;
@@ -22,6 +28,13 @@ public class CocktailService {
     private CocktailRepository cocktailRepository;
 
     private final ApiConfig apiConfig;
+
+    @Value("${rapid.api.key}")
+    private String apiKey;
+    @Value("${rapid.api.requestURI}")
+    private String apirequestURI;
+    @Value("${rapid.api.host}")
+    private String apihost;
 
     public void saveCocktails(List<Cocktail> cocktails) {
         cocktailRepository.saveAll(cocktails);
@@ -81,5 +94,28 @@ public class CocktailService {
         }
 
         return cocktail;
+    }
+
+    public List<Cocktail> getListFromAPI() throws IOException {
+        OkHttpClient client = new OkHttpClient();
+
+        Request request = new Request.Builder()
+                .url(apirequestURI)
+                .get()
+                .addHeader("X-RapidAPI-Key", apiKey)
+                .addHeader("X-RapidAPI-Host", apihost)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (response.isSuccessful() && response.body() != null) {
+                System.out.println(response.body().string());
+            } else {
+                System.out.println("Request not successful: " + response);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return List.of();
     }
 }

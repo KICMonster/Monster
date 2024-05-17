@@ -1,9 +1,12 @@
 package com.codingbox.monster;
 
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-
+@Service
 @RequiredArgsConstructor
 public class ApiDefaultSetting {
     private final ApiConfig apiConfig;
@@ -51,11 +54,11 @@ public class ApiDefaultSetting {
 
     }
 
-    public JSONObject getResultJSON(String result) {
+    public JSONArray getResultJSON(String result) {
         JSONParser parser = new JSONParser();
         try {
             JSONObject jsonObject = (JSONObject) parser.parse(result);
-            return (JSONObject) jsonObject.get("drinks");
+            return (JSONArray) jsonObject.get("drinks");
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
