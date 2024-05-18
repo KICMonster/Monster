@@ -18,11 +18,7 @@ public class Cocktail {
     private Long idDrink;
 
     private String strDrink;
-    private String strDrinkAlternate;
-    private String strTags;
-    private String strVideo;
     private String strCategory;
-    private String strIBA;
     private String strAlcoholic;
     private String strGlass;
     private String strInstructions;
@@ -57,60 +53,53 @@ public class Cocktail {
     private String strMeasure13;
     private String strMeasure14;
     private String strMeasure15;
-    private String strImageSource;
-    private String strImageAttribution;
     private String strCreativeCommonsConfirmed;
-    private LocalDateTime dateModified;
+    private String strRecommend;
 
     // 기본 생성자
     public Cocktail() {}
 
     // 전체 필드를 포함하는 생성자
-    public Cocktail(Long idDrink, String strDrink, String strDrinkAlternate, String strTags, String strVideo, String strCategory, String strIBA, String strAlcoholic, String strGlass, String strInstructions, String strDrinkThumb, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, String strImageSource, String strImageAttribution, String strCreativeCommonsConfirmed, LocalDateTime dateModified) {
-        this.idDrink = idDrink;
-        this.strDrink = strDrink;
-        this.strDrinkAlternate = strDrinkAlternate;
-        this.strTags = strTags;
-        this.strVideo = strVideo;
-        this.strCategory = strCategory;
-        this.strIBA = strIBA;
-        this.strAlcoholic = strAlcoholic;
-        this.strGlass = strGlass;
-        this.strInstructions = strInstructions;
-        this.strDrinkThumb = strDrinkThumb;
-        this.strIngredient1 = strIngredient1;
-        this.strIngredient2 = strIngredient2;
-        this.strIngredient3 = strIngredient3;
-        this.strIngredient4 = strIngredient4;
-        this.strIngredient5 = strIngredient5;
-        this.strIngredient6 = strIngredient6;
-        this.strIngredient7 = strIngredient7;
-        this.strIngredient8 = strIngredient8;
-        this.strIngredient9 = strIngredient9;
-        this.strIngredient10 = strIngredient10;
-        this.strIngredient11 = strIngredient11;
-        this.strIngredient12 = strIngredient12;
-        this.strIngredient13 = strIngredient13;
-        this.strIngredient14 = strIngredient14;
-        this.strIngredient15 = strIngredient15;
-        this.strMeasure1 = strMeasure1;
-        this.strMeasure2 = strMeasure2;
-        this.strMeasure3 = strMeasure3;
-        this.strMeasure4 = strMeasure4;
-        this.strMeasure5 = strMeasure5;
-        this.strMeasure6 = strMeasure6;
-        this.strMeasure7 = strMeasure7;
-        this.strMeasure8 = strMeasure8;
-        this.strMeasure9 = strMeasure9;
-        this.strMeasure10 = strMeasure10;
-        this.strMeasure11 = strMeasure11;
-        this.strMeasure12 = strMeasure12;
-        this.strMeasure13 = strMeasure13;
-        this.strMeasure14 = strMeasure14;
-        this.strMeasure15 = strMeasure15;
-        this.strImageSource = strImageSource;
-        this.strImageAttribution = strImageAttribution;
-        this.strCreativeCommonsConfirmed = strCreativeCommonsConfirmed;
-        this.dateModified = dateModified;
+    public Cocktail(Long idDrink, String strDrink, String strCategory, String strAlcoholic, String strGlass, String strInstructions, String strDrinkThumb, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, String strCreativeCommonsConfirmed, String strRecommend) {
+        this.idDrink = idDrink;  // 칵테일의 고유 ID
+        this.strDrink = strDrink;  // 칵테일 이름
+        this.strCategory = strCategory;  // 칵테일 카테고리
+        this.strAlcoholic = strAlcoholic;  // 알코올 여부 (Alcoholic, Non_Alcoholic)
+        this.strGlass = strGlass;  // 사용되는 글라스 종류
+        this.strInstructions = strInstructions;  // 칵테일 제조법
+        this.strDrinkThumb = strDrinkThumb;  // 칵테일 이미지 URL
+        this.strIngredient1 = strIngredient1;  // 첫 번째 재료 (있을 경우)
+        this.strIngredient2 = strIngredient2;  // 두 번째 재료 (있을 경우)
+        this.strIngredient3 = strIngredient3;  // 세 번째 재료 (있을 경우)
+        this.strIngredient4 = strIngredient4;  // 네 번째 재료 (있을 경우)
+        this.strIngredient5 = strIngredient5;  // 다섯 번째 재료 (있을 경우)
+        this.strIngredient6 = strIngredient6;  // 여섯 번째 재료 (있을 경우)
+        this.strIngredient7 = strIngredient7;  // 일곱 번째 재료 (있을 경우)
+        this.strIngredient8 = strIngredient8;  // 여덟 번째 재료 (있을 경우)
+        this.strIngredient9 = strIngredient9;  // 아홉 번째 재료 (있을 경우)
+        this.strIngredient10 = strIngredient10;  // 열 번째 재료 (있을 경우)
+        this.strIngredient11 = strIngredient11;  // 열한 번째 재료 (있을 경우)
+        this.strIngredient12 = strIngredient12;  // 열두 번째 재료 (있을 경우)
+        this.strIngredient13 = strIngredient13;  // 열세 번째 재료 (있을 경우)
+        this.strIngredient14 = strIngredient14;  // 열네 번째 재료 (있을 경우)
+        this.strIngredient15 = strIngredient15;  // 열다섯 번째 재료 (있을 경우)
+        this.strMeasure1 = strMeasure1;  // 첫 번째 재료의 측정값 (있을 경우)
+        this.strMeasure2 = strMeasure2;  // 두 번째 재료의 측정값 (있을 경우)
+        this.strMeasure3 = strMeasure3;  // 세 번째 재료의 측정값 (있을 경우)
+        this.strMeasure4 = strMeasure4;  // 네 번째 재료의 측정값 (있을 경우)
+        this.strMeasure5 = strMeasure5;  // 다섯 번째 재료의 측정값 (있을 경우)
+        this.strMeasure6 = strMeasure6;  // 여섯 번째 재료의 측정값 (있을 경우)
+        this.strMeasure7 = strMeasure7;  // 일곱 번째 재료의 측정값 (있을 경우)
+        this.strMeasure8 = strMeasure8;  // 여덟 번째 재료의 측정값 (있을 경우)
+        this.strMeasure9 = strMeasure9;  // 아홉 번째 재료의 측정값 (있을 경우)
+        this.strMeasure10 = strMeasure10;  // 열 번째 재료의 측정값 (있을 경우)
+        this.strMeasure11 = strMeasure11;  // 열한 번째 재료의 측정값 (있을 경우)
+        this.strMeasure12 = strMeasure12;  // 열두 번째 재료의 측정값 (있을 경우)
+        this.strMeasure13 = strMeasure13;  // 열세 번째 재료의 측정값 (있을 경우)
+        this.strMeasure14 = strMeasure14;  // 열네 번째 재료의 측정값 (있을 경우)
+        this.strMeasure15 = strMeasure15;  // 열다섯 번째 재료의 측정값 (있을 경우)
+        this.strCreativeCommonsConfirmed = strCreativeCommonsConfirmed;  // 크리에이티브 커먼즈 확인 여부 (있을 경우)
+        this.strRecommend = strRecommend;
+
     }
 }

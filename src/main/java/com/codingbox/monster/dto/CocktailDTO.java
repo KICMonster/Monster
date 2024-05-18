@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 public class CocktailDTO {
     @NotNull
     private Long idDrink;
+
     private String strDrink;
     private String strDrinkAlternate;
     private String strTags;
@@ -55,4 +56,5 @@ public class CocktailDTO {
     private String strImageAttribution;
     private String strCreativeCommonsConfirmed;
     private LocalDateTime dateModified;
+    private String strRecommend;
 }
