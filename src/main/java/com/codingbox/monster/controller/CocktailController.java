@@ -30,18 +30,18 @@ public class CocktailController {
     @PostMapping("/save")
     public String saveCocktails(@RequestBody CocktailDTO cocktailDTO) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
-        List<Cocktail> cocktails = createExampleData(cocktailDTO, 100);
+        List<Cocktail> cocktails = createExampleData(cocktailDTO);
 
         cocktailService.saveCocktails(cocktails);
 
         return "저장성공";
     }
 
-    private List<Cocktail> createExampleData(CocktailDTO cocktailDTO, Integer count) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    private List<Cocktail> createExampleData(CocktailDTO cocktailDTO) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         List<Cocktail> cocktails = new ArrayList<>();
         JSONObject json = new org.json.JSONObject();
 
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < 600; i++) {
             Cocktail cocktail = cocktailService.getResult(json);
             cocktails.add(cocktail);
         }

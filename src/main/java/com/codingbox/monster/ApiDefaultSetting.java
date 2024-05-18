@@ -20,8 +20,10 @@ import java.net.URL;
 public class ApiDefaultSetting {
     private final ApiConfig apiConfig;
 
+
+
     public StringBuilder getUrlBuilder() {
-        return new StringBuilder("https://the-cocktail-db.p.rapidapi.com/search.php?s=vodka");
+        return new StringBuilder(apiConfig.getApirequestURI());
     }
 
     public String getResult(StringBuilder urlBuilder) {
