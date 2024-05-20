@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,9 +19,12 @@ import com.monster.luvCocktail.domain.cocktail.service.CocktailService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 @RestController
 @RequiredArgsConstructor
+@Log4j2
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/api/cocktail")
 public class CocktailController {
 
@@ -34,11 +38,13 @@ public class CocktailController {
 	@ApiResponse(responseCode = "400", description = "파라미터 오류")
 //	@Secured("ROLE_ADMIN") 
 	public ResponseEntity<CreateCocktailResponse> create(@RequestBody CreateCocktailRequest request) {
+		log.info("칵테일을 추가합니다");
 		return ResponseEntity.ok(cocktailService.create(request));
 	}
 	
 	@GetMapping("")
 	public ResponseEntity<List<CocktailDTO>> getList() {
+		log.info("칵테일 정보를 가져옵니다");
 		return ResponseEntity.ok(cocktailService.getList());
 	}
 	

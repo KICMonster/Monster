@@ -26,7 +26,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @SequenceGenerator(
 		name="Cocktail_SEQ_GENERATOR",
-		sequenceName = "Cocktail,SEQ",
+		sequenceName = "Cocktail_SEQ",
 		initialValue = 1, allocationSize = 1
 		)
 public class Cocktail {
@@ -38,7 +38,6 @@ public class Cocktail {
 			)
 	@Column(name="cocktail_id")
 	private Long id;
-	
 	private String title;
 	private String description;
 	private Long degree;
