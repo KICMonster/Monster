@@ -8,6 +8,14 @@ out/
 !**/src/test/**/out/
 
 # STS
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
 .apt_generated
 .classpath
 .factorypath
@@ -20,6 +28,16 @@ bin/
 !**/src/test/**/bin/
 
 # NetBeans
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
 /nbproject/private/
 /nbbuild/
 /dist/
@@ -41,3 +59,5 @@ build/
 !**/build.gradle
 !**/src/main/**
 !**/src/test/**
+### VS Code ###
+.vscode/
