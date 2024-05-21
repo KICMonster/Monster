@@ -1,0 +1,148 @@
+/* body {
+  background-image: url(./img/cocktail.jpg);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% 80%;
+  background-attachment: fixed;
+} */
+
+/* App.css */
+.logo {
+  margin-right: 30px;
+  width: 100px; /* 로고의 너비 설정 */
+  height: 65px; /* 로고의 높이 설정 */
+  background-image: url('./img/logo.png'); /* 이미지 경로 설정 */
+  background-size: contain; /* 이미지가 컨테이너 안에 맞게 조정 */
+  background-repeat: no-repeat; /* 이미지가 반복되지 않도록 설정 */
+}
+
+.navbar {
+  background-color: transparent; /* 투명 배경 */
+  color: white; /* 글자 색상 */
+}
+
+/* App.css */
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  margin: 0px;
+}
+
+.search-input {
+  padding: 10px;
+  font-size: 16px;
+  width: 90%;
+  margin-right: 10px;
+  border-radius: 15px;
+  border: 1px solid #ccc;
+}
+
+.search-button {
+  padding: 10px 20px;
+  background: rgba( 54, 69, 79);
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-button-color:hover {
+  background-color: rgb(36, 47, 54) !important; /* 마우스 오버 시 더 어두운 차콜색 */
+}
+
+.login-button {
+  margin-left: auto;
+  margin-right: 20px;
+  margin-bottom: 50px;
+  padding: 5px 10px;
+  background: rgba( 54, 69, 79);
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  
+}
+
+.nav-link {
+  margin-right: 20px; /* 오른쪽 마진을 추가하여 간격을 만듬 */
+  color: white !important;
+}
+
+/* 마지막 링크의 마진을 제거하려면 */
+.nav-link:last-child {
+  margin-right: 0; /* 마지막 항목의 마진을 0으로 설정 */
+}
+
+.navbar.shrink .nav-link {
+  font-size: 12px; /* 축소시 폰트 크기 감소 */
+}
+
+.navbar.expand .nav-link {
+  font-size: 16px; /* 확장시 폰트 크기 */
+}
+
+.login-button-color:hover {
+  background-color: rgb(36, 47, 54) !important; /* 마우스 오버 시 더 어두운 차콜색 */
+}
+
+.cocktail-button {
+  color: white !important;
+}
+
+.ingredient-button {
+  color: white !important;
+}
+
+.recipe-button {
+  color: white !important;
+}
+
+.news-button {
+  color: white !important;
+}
+
+.header .logo {
+  font-size: 24px;  /* 선호하는 크기에 맞게 조정 */
+}
+
+.header nav ul {
+  list-style: none;
+  display: flex;
+}
+
+.header nav ul li {
+  margin: 0 10px;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ab2d2d !important;  /* 배경색을 흰색으로 설정, 필요에 따라 변경 가능 */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);  /* 그림자 효과 추가 */
+  z-index: 1000;  /* 다른 요소들보다 위에 오도록 z-index 설정 */
+  transition: all 0.3s ease; /* 부드러운 전환 효과 */
+  padding: 20px; /* 초기 패딩 */
+}
+
+.header.expand {
+  padding: 20px;
+  background-color: #fff; /* 원래 배경색 */
+}
+
+.header.shrink {
+  padding: 10px; /* 스크롤 시 패딩 감소 */
+  background-color: #3e3a61 !important; /* 스크롤 시 배경색 변경 */
+}
+
+.cocktail {
+  margin-right: 30px;
+  width: 100px;
+  height: 65px;
+  background-image: url('./img/Cocktail_02.jpg');
+  background-size: contain; 
+  background-repeat: no-repeat;
+}

@@ -1,0 +1,60 @@
+.historyHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .histoy_div1 {
+    position: relative;
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .histoy_div1 img {
+    width: 101.2%;
+    object-fit: cover;
+    border: 3px solid #000000; 
+  }
+  
+  .history_name {
+    position: absolute;
+    background-color: antiquewhite;
+    width: 45%;
+    top: 95%;
+    left: 35%;
+    border: 3px solid #000000;
+    padding: 35px;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .history_name h4 {
+    margin: 5px 0;
+  }
+  
+  .history_name h1 {
+    margin: 10px 0;
+    font-size: 24px;
+  }
+  
+  .history_name h4:last-child {
+    margin-bottom: 0;
+  }
+  
+  .historyMain {
+    padding: 20px;
+  }
+  
+  .historyCokatail {
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: justify;
+  }
+  
+
+  .historyMain > * {
+    border: 3px solid #000000;
+    padding: 35px;
+    margin-bottom: 20px;
+  }
