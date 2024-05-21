@@ -24,7 +24,7 @@ public class Ingredient {
 	
 	private String name;
 	private String description;
-	private String degree;
+//	private String degree;
 	
 	@OneToMany(mappedBy = "ingredient")
 	private List<CocktailAndIngredients> cocktailList = new ArrayList<>();

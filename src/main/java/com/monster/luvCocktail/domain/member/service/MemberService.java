@@ -144,13 +144,13 @@ public class MemberService {
         memberRepository.save(member);
     }
 
-    public List<Cocktail> findCocktailByTaste(List<String> tasteIds) {
-
-
-        // recommend 값에 해당하는 칵테일 정보를 가져옵니다.
-        List<Cocktail> recommendedCocktails = cocktailsRepository.findByRecommendIn(tasteIds);
-
-        // 추천된 칵테일 리스트를 반환합니다.
-        return recommendedCocktails;
-    }
+//    public List<Cocktail> findCocktailByTaste(List<String> tasteIds) {
+//
+//
+//        // recommend 값에 해당하는 칵테일 정보를 가져옵니다.
+//        List<Cocktail> recommendedCocktails = cocktailsRepository.findByRecommendIn(tasteIds);
+//
+//        // 추천된 칵테일 리스트를 반환합니다.
+//        return recommendedCocktails;
+//    }
 }

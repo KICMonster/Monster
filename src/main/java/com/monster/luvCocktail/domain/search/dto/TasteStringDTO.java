@@ -1,7 +1,6 @@
 package com.monster.luvCocktail.domain.search.dto;
 
 
-import java.util.List;
 
 public class TasteStringDTO {
     private String tasteString;
