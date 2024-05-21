@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "rapid.api.request-uRI",
+    "type": "java.lang.String",
+    "description": "A description for 'rapid.api.request-uRI'"
+  },
+  {
+    "name": "rapid.api.host",
+    "type": "java.lang.String",
+    "description": "A description for 'rapid.api.host'"
+  },
+  {
+    "name": "rapid.api.key",
+    "type": "java.lang.String",
+    "description": "A description for 'rapid.api.key'"
+  }
+]}

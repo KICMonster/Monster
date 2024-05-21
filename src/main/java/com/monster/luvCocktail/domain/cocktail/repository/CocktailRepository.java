@@ -8,5 +8,5 @@ import com.monster.luvCocktail.domain.cocktail.entity.Cocktail;
 
 public interface CocktailRepository extends JpaRepository<Cocktail, Long>{
 
-	List<Cocktail> findByRecommendIn(List<String> tasteIds);
+//	List<Cocktail> findByRecommendIn(List<String> tasteIds);
 }

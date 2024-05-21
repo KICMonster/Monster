@@ -1,4 +1,3 @@
-
 server:
   port: 8080
   servlet:
@@ -6,16 +5,28 @@ server:
       charset: UTF-8
       enabled: true
       force: true
-#  ssl:
-#    key-store-type: PKCS12
-#    key-store: classpath:keystore.p12
-#    key-store-password: 860802
-#    key-alias: selfsigned
-#  max-http-request-header-size: 65536
-  
-
 
 spring:
+  application:
+  
+    name: cocktails
+  
+  datasource:
+   url: jdbc:mysql://database-1.cls4oq20gmca.ap-northeast-2.rds.amazonaws.com:3306/MonsterDB
+   username: admin
+   password: admin1013
+   driver-class-name: com.mysql.cj.jdbc.Driver
+   
+  jpa:
+   show-sql: true
+   properties:
+    hibernate:
+      format_sql: true
+      show_sql: true
+   hibernate:
+    ddl-auto: create
+  profiles:
+    include: oauth
   security:
     oauth2:
       client:
@@ -23,32 +34,22 @@ spring:
           naver:
             client-id: HXj22oVU2540zif4gFmn
             client-secret: 5D4Hsx313A
-            scope:
-              - name
-              - email
+            scope: [name, email]
             client-name: naver
             authorization-grant-type: authorization_code
             redirect-uri: 'https://localhost:9092/login/auth/naver/callback'
           kakao:
             client-id: ff186d351034c6d3db268df03e7c596a
             client-secret: 6bX9xJgRVwbFUApqPU0fi3nEiWjNY4Cd
-            scope:
-              - openid
-              - profile
-              - account_email
-              - profile_nickname
+            scope: [openid, profile, account_email, profile_nickname]
             client-name: kakao
             authorization-grant-type: authorization_code
             redirect-uri: 'https://localhost:9092/login/auth/kakao/callback'
             client-authentication-method: client_secret_post
-          # 구글 설정 추가 예시
           google:
             client-id: 589056962488-5211p8t3nk7etdiajjp3qdgg7n4jdi4e.apps.googleusercontent.com
             client-secret: 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
-            scope:
-              - email
-              - profile
-              - openid
+            scope: [email, profile, openid]
             client-name: Google
             authorization-grant-type: authorization_code
             redirect-uri: 'https://localhost:9092/login/auth/google/callback'
@@ -63,66 +64,32 @@ spring:
             token-uri: "https://kauth.kakao.com/oauth/token"
             user-info-uri: "https://kapi.kakao.com/v2/user/me"
             user-name-attribute: id
-          # 구글 설정 추가 예시
           google:
             authorization-uri: "https://accounts.google.com/o/oauth2/v2/auth"
             token-uri: "https://oauth2.googleapis.com/token"
             user-info-uri: "https://openidconnect.googleapis.com/v1/userinfo"
             user-name-attribute: sub
-  profiles:
-    include: oauth
-  application:
-    name: cocktails
-
-#  jpa:
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.OracleDialect
-#    show-sql: true
-#    hibernate:
-#      ddl-auto: update
-
-
   config:
     import:
       - classpath:/yaml/application-{verification}.yml
       - classpath:/yaml/application-{weather}.yml
-
-
+      
 
 logging:
   level:
-    org.springframework.security: TRACE
-    org.springframework.security.oauth2: TRACE
+    org:
+      springframework:
+        security: TRACE
+        security.oauth2: TRACE
+      hibernate:
+        SQL: debug
+        type: trace
 
 jwt:
   secret-key: "J6Dfye3LvLpH2EM5B6W9XSn7HURx5Vhsw7pqG9T6moE="
 
-
- 
-
-
-# MySQL 연결 설정
-  datasource:
-    url: jdbc:mysql://database-1.cls4oq20gmca.ap-northeast-2.rds.amazonaws.com:3306/MonsterDB
-    username: admin
-    password: admin1013
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-# jpa설정
-  jpa:
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-        show_sql: true
-    hibernate:
-      ddl-auto: none
-      
-      
-  logging:
-    level:
-      org:
-        hibernate:
-          SQL: debug
-          type: trace
+rapid:
+  api:
+    requestURI: "https://the-cocktail-db.p.rapidapi.com/filter.php?i=Gin"
+    host: "the-cocktail-db.p.rapidapi.com"
+    key: "994a06b8f2mshbff0e95525f145fp1f054bjsn7eefc7c1bcf9"

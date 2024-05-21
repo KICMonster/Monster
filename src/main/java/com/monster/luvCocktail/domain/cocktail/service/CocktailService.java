@@ -1,22 +1,11 @@
 package com.monster.luvCocktail.domain.cocktail.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import com.monster.luvCocktail.domain.cocktail.dto.CocktailDTO;
-import com.monster.luvCocktail.domain.cocktail.dto.CreateCocktailRequest;
-import com.monster.luvCocktail.domain.cocktail.dto.CreateCocktailResponse;
 import com.monster.luvCocktail.domain.cocktail.entity.Cocktail;
 import com.monster.luvCocktail.domain.cocktail.repository.CocktailRepository;
-import com.monster.luvCocktail.domain.member.entity.Member;
-import com.monster.luvCocktail.global.SessionConst;
 import com.monster.luvCocktail.global.config.api.ApiConfig;
 import com.monster.luvCocktail.global.config.api.ApiDefaultSetting;
-import com.monster.luvCocktail.global.exception.ErrorCode;
-import com.monster.luvCocktail.global.exception.ServiceException;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -36,6 +25,7 @@ public class CocktailService {
     @Autowired
     private CocktailRepository cocktailRepository;
 
+    @Autowired
     private final ApiConfig apiConfig;
 
     @Value("${rapid.api.key}")
